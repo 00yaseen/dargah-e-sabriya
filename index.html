@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Court Work Manager</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar is-white has-shadow" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand">
+
+            <a class="navbar-item" href="index.html">
+
+                <img src="delhi-high-court-logo.png" alt="Delhi High Court Logo"
+                    style="max-height:55px; margin-right:10px;">
+
+                <div>
+                    <p class="title is-6 mb-5">Dargah Sabriya</p>
+                    <p class="subtitle is-7">Court Work Manager</p>
+                </div>
+
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="mainNavbar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+
+        </div>
+
+
+        <div id="mainNavbar" class="navbar-menu">
+
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+
+                <a class="navbar-item" href="hc.html">
+                    High Court
+                </a>
+
+                <a class="navbar-item" href="phc.html">
+                    Patiala House Court
+                </a>
+
+                <a class="navbar-item" href="thc.html">
+                    Tis Hazari
+                </a>
+
+                <a class="navbar-item" href="file-management.html">
+                    File Management
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        burgers.forEach(el => {
+            el.addEventListener('click', () => {
+
+                const target = el.dataset.target;
+                const menu = document.getElementById(target);
+
+                el.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+
+            });
+        });
+
+    });
+
+</script>
