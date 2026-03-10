@@ -3,150 +3,207 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Court Work Manager Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<title>Court Work Manager Login</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-    <style>
-        body {
-            background: #f4f6f9;
-            font-family: "Inter", sans-serif;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .login-box {
-            width: 380px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            border-radius: 10px;
-        }
+<style>
 
-        .login-header {
-            background: #1f2a44;
-            color: white;
-            padding: 20px;
-            border-radius: 10px 10px 0 0;
-            text-align: center;
-        }
+html,body{
+height:100%;
+font-family:"Inter",sans-serif;
+}
 
-        .password-toggle {
-            cursor: pointer;
-        }
-    </style>
+/* BACKGROUND */
+
+body{
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#1f2a44,#2f3e67);
+position:relative;
+overflow:hidden;
+}
+
+/* subtle pattern */
+
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background-image:radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+background-size:30px 30px;
+opacity:.3;
+}
+
+/* LOGIN CARD */
+
+.login-box{
+width:380px;
+border-radius:12px;
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
+overflow:hidden;
+position:relative;
+z-index:2;
+}
+
+/* HEADER */
+
+.login-header{
+background:#1f2a44;
+color:white;
+padding:25px;
+text-align:center;
+}
+
+.login-header h1{
+margin-bottom:5px;
+}
+
+/* FORM AREA */
+
+.login-body{
+padding:30px;
+background:white;
+}
+
+/* PASSWORD TOGGLE */
+
+.password-toggle{
+cursor:pointer;
+}
+
+/* INPUT FOCUS */
+
+.input:focus{
+border-color:#c9a227;
+box-shadow:0 0 0 1px #c9a227;
+}
+
+/* LOGIN BUTTON */
+
+.button.is-dark{
+background:#1f2a44;
+}
+
+.button.is-dark:hover{
+background:#2f3e67;
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <div class="box login-box">
+<main>
 
-        <div class="login-header">
+<div class="login-box">
 
-            <h1 class="title is-5 has-text-white">Court Work Manager</h1>
-            <p class="is-size-7">Secure Login</p>
+<div class="login-header">
 
-        </div>
+<h1 class="title is-5 has-text-white">
+Court Work Manager
+</h1>
 
-        <div class="p-5">
+<p class="is-size-7">
+Secure Login
+</p>
 
-            <div class="field">
+</div>
 
-                <label class="label">Username</label>
+<div class="login-body">
 
-                <div class="control">
-                    <input class="input" type="text" id="username" placeholder="Enter username">
-                </div>
+<div class="field">
 
-            </div>
+<label class="label">Username</label>
 
+<div class="control">
+<input class="input" type="text" id="username" placeholder="Enter username">
+</div>
 
-            <div class="field">
+</div>
 
-                <label class="label">Password</label>
+<div class="field">
 
-                <div class="control has-icons-right">
+<label class="label">Password</label>
 
-                    <input class="input" type="password" id="password" placeholder="Enter password">
+<div class="control has-icons-right">
 
-                    <span class="icon is-small is-right password-toggle" onclick="togglePassword()">
-                        👁
-                    </span>
+<input class="input" type="password" id="password" placeholder="Enter password">
 
-                </div>
+<span class="icon is-small is-right password-toggle" onclick="togglePassword()">👁</span>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="field">
+<div class="field">
 
-                <button class="button is-dark is-fullwidth" onclick="login()">
-                    Login
-                </button>
+<button class="button is-dark is-fullwidth" onclick="login()">
+Login
+</button>
 
-            </div>
+</div>
 
-            <p id="error" class="has-text-danger has-text-centered is-size-7"></p>
+<p id="error" class="has-text-danger has-text-centered is-size-7"></p>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
+</main>
 
-    <script>
+<script>
 
-        function login() {
+function login(){
 
-            let username = document.getElementById("username").value.toLowerCase().trim();
-            let password = document.getElementById("password").value.toLowerCase().trim();
+let username=document.getElementById("username").value.toLowerCase().trim();
+let password=document.getElementById("password").value.toLowerCase().trim();
 
-            if (
-                (username === "yaseen" && password === "dargah") ||
-                (username === "bakhtavar" && password === "dargah")
-            ) {
+if(
+(username==="yaseen" && password==="dargah") ||
+(username==="bakhtavar" && password==="dargah")
+){
 
-                sessionStorage.setItem("loggedIn", "true");
+sessionStorage.setItem("loggedIn","true");
+window.location.href="dashboard.html";
 
-                window.location.href = "dashboard.html";
+}else{
 
-            } else {
+document.getElementById("error").innerText="Invalid username or password";
 
-                document.getElementById("error").innerText = "Invalid username or password";
+}
 
-            }
+}
 
-        }
+/* PASSWORD TOGGLE */
 
+function togglePassword(){
 
-        /* SHOW HIDE PASSWORD */
+let pass=document.getElementById("password");
 
-        function togglePassword() {
+pass.type = pass.type==="password" ? "text" : "password";
 
-            let pass = document.getElementById("password");
+}
 
-            if (pass.type === "password") {
-                pass.type = "text";
-            } else {
-                pass.type = "password";
-            }
+/* ENTER KEY LOGIN */
 
-        }
+document.addEventListener("keypress",function(e){
 
-        document.addEventListener("keypress", function (e) {
+if(e.key==="Enter"){
+login();
+}
 
-            if (e.key === "Enter") {
-                login();
-            }
+});
 
-        });
-
-    </script>
+</script>
 
 </body>
-
 </html>
