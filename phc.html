@@ -3,319 +3,325 @@
 
 <head>
 
-    <script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        if (sessionStorage.getItem("loggedIn") !== "true") {
-            window.location.href = "login.html";
-        }
+<title>Court Work Manager</title>
 
-    </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Court Work Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* PAGE PROTECTION */
 
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+if (sessionStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
 
-    <style>
-        body {
-            background: #f4f6f9;
-            font-family: "Inter", sans-serif;
-        }
+<style>
 
-        /* TOPBAR */
+body{
+background:#f4f6f9;
+font-family:"Inter",sans-serif;
+}
 
-        .topbar {
-            background: #1f2a44;
-            color: white;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 900;
-        }
+/* TOPBAR */
 
-        .menu-toggle {
-            font-size: 26px;
-            cursor: pointer;
-            margin-right: 15px;
-        }
+.topbar{
+background:#1f2a44;
+color:white;
+padding:12px 20px;
+display:flex;
+align-items:center;
+position:sticky;
+top:0;
+z-index:900;
+}
 
-        /* SIDEBAR */
+.menu-toggle{
+font-size:26px;
+cursor:pointer;
+margin-right:15px;
+}
 
-        .sidebar {
-            width: 260px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: #1f2a44;
-            color: white;
-            padding: 20px;
-            transition: 0.3s;
-            z-index: 1000;
-            overflow-y: auto;
-        }
+/* SIDEBAR */
 
-        /* LOGO */
+.sidebar{
+width:260px;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+background:#1f2a44;
+color:white;
+padding:20px;
+transition:0.3s;
+z-index:1000;
+overflow-y:auto;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
+/* LOGO */
 
-        .logo img {
-            height: 45px;
-            margin-right: 10px;
-        }
+.logo{
+display:flex;
+align-items:center;
+margin-bottom:25px;
+}
 
-        /* MENU */
+.logo img{
+height:45px;
+margin-right:10px;
+}
 
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-weight: 500;
-            transition: 0.2s;
-        }
+/* MENU */
 
-        .sidebar a:hover {
-            background: #2f3e67;
-        }
+.sidebar a{
+display:flex;
+align-items:center;
+gap:10px;
+color:white;
+padding:12px 15px;
+border-radius:6px;
+margin-bottom:6px;
+font-weight:500;
+transition:0.2s;
+text-decoration:none;
+}
 
-        .sidebar a.active {
-            background: #c9a227;
-            color: black;
-        }
+.sidebar a:hover{
+background:#2f3e67;
+}
 
-        /* MAIN CONTENT */
+.sidebar a.active{
+background:#c9a227;
+color:black;
+}
 
-        .main-content {
-            margin-left: 260px;
-            padding: 30px;
-        }
+/* MAIN CONTENT */
 
-        /* HEADER BAR */
+.main-content{
+margin-left:260px;
+padding:30px;
+}
 
-        .page-header {
-            background: #1f2a44;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* HEADER BAR */
 
-        /* OVERLAY */
+.page-header{
+background:#1f2a44;
+color:white;
+padding:15px 20px;
+border-radius:6px;
+margin-bottom:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: none;
-            z-index: 900;
-        }
+/* OVERLAY */
 
-        /* MOBILE */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+display:none;
+z-index:900;
+}
 
-        @media screen and (max-width:768px) {
+/* MOBILE */
 
-            .sidebar {
-                left: -260px;
-            }
+@media screen and (max-width:768px){
 
-            .sidebar.active {
-                left: 0;
-            }
+.sidebar{
+left:-260px;
+}
 
-            .overlay.active {
-                display: block;
-            }
+.sidebar.active{
+left:0;
+}
 
-            .main-content {
-                margin-left: 0;
-                padding: 20px;
-            }
+.overlay.active{
+display:block;
+}
 
-        }
-    </style>
+.main-content{
+margin-left:0;
+padding:20px;
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <!-- TOPBAR -->
+<!-- TOPBAR -->
 
-    <div class="topbar">
-        <i class='bx bx-menu menu-toggle' id="menuToggle"></i>
-        <strong>Court Work Manager</strong>
-    </div>
-
-    <!-- SIDEBAR -->
-
-    <div class="sidebar" id="sidebar">
-
-        <div class="logo">
-
-            <img src="delhi-high-court-logo.png">
-
-            <div>
-                <strong class="has-text-white">Dargah Sabriya</strong><br>
-                <small>Court Work Manager</small>
-            </div>
-
-        </div>
-
-        <hr>
-
-        <a href="dashboard.html">
-            <i class='bx bx-home'></i> Dashboard
-        </a>
-
-        <a href="hc.html">
-            <i class='bx bx-buildings'></i> High Court
-        </a>
-
-        <a href="phc.html" class="active">
-            <i class='bx bx-landmark'></i> Patiala House Court
-        </a>
-
-        <a href="thc.html">
-            <i class='bx bx-briefcase'></i> Tis Hazari Court
-        </a>
-
-        <a href="file-management.html">
-            <i class='bx bx-folder'></i> File Management
-        </a>
-
-        <a onclick="logout()"><i class='bx bx-log-out'></i>Logout</a>
-    </div>
-
-    <!-- OVERLAY -->
-
-    <div class="overlay" id="overlay"></div>
-
-    <!-- MAIN CONTENT -->
-
-    <div class="main-content">
+<header class="topbar">
+<i class='bx bx-menu menu-toggle' id="menuToggle"></i>
+<strong>Court Work Manager</strong>
+</header>
 
 
-        <section class="section pt-1">
+<!-- SIDEBAR -->
 
-            <div class="container">
+<aside class="sidebar" id="sidebar">
 
-                <div class="box">
+<div class="logo">
+<img src="delhi-high-court-logo.png" alt="Delhi High Court Logo">
+<div>
+<strong class="has-text-white">Dargah Sabriya</strong><br>
+<small>Court Work Manager</small>
+</div>
+</div>
 
-                    <div class="page-header">
+<hr>
 
-                        <p class="has-text-weight-bold">
-                            Patiala House Court
-                        </p>
+<a href="dashboard.html">
+<i class='bx bx-home'></i> Dashboard
+</a>
 
-                        <span class="tag has-background-warning">
-                            Upcoming Case List
-                        </span>
+<a href="hc.html">
+<i class='bx bx-buildings'></i> High Court
+</a>
 
-                    </div>
+<a href="phc.html" class="active">
+<i class='bx bx-landmark'></i> Patiala House Court
+</a>
 
-                    <div class="table-container">
+<a href="thc.html">
+<i class='bx bx-briefcase'></i> Tis Hazari Court
+</a>
 
-                        <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+<a href="file-management.html">
+<i class='bx bx-folder'></i> File Management
+</a>
 
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Case Title</th>
-                                    <th>Case No</th>
-                                    <th>Date of Hearing</th>
-                                    <th>Court No</th>
-                                    <th>Remarks</th>
-                                </tr>
-                            </thead>
+<hr>
 
-                            <tbody>
+<a href="#" onclick="logout()" role="button">
+<i class='bx bx-log-out'></i> Logout
+</a>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ishrat Jahan vs S.S.B.H.S</td>
-                                    <td>CS-102/2026</td>
-                                    <td>02 Mar 2026</td>
-                                    <td>12</td>
-                                    <td>-</td>
-                                </tr>
+</aside>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>S.S.B.H.S vs Ganga Ram</td>
-                                    <td>CS-118/2026</td>
-                                    <td>17 Mar 2026</td>
-                                    <td>08</td>
-                                    <td>Arguments</td>
-                                </tr>
 
-                                <tr>
-                                    <td>3</td>
-                                    <td>S.S.B.H.S vs State Authority</td>
-                                    <td>CS-120/2026</td>
-                                    <td>18 Mar 2026</td>
-                                    <td>05</td>
-                                    <td>Reply Filing</td>
-                                </tr>
+<!-- OVERLAY -->
 
-                            </tbody>
+<div class="overlay" id="overlay"></div>
 
-                        </table>
 
-                    </div>
+<!-- MAIN CONTENT -->
 
-                </div>
+<main class="main-content">
 
-            </div>
+<section class="section pt-1">
 
-        </section>
+<div class="container">
 
-    </div>
+<div class="box">
 
-    <script>
+<div class="page-header">
 
-        const toggle = document.getElementById("menuToggle");
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
+<p class="has-text-weight-bold">
+Patiala House Court
+</p>
 
-        toggle.addEventListener("click", function () {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        });
+<span class="tag has-background-warning">
+Upcoming Case List
+</span>
 
-        overlay.addEventListener("click", function () {
-            sidebar.classList.remove("active");
-            overlay.classList.remove("active");
-        });
+</div>
 
-        function logout() {
+<div class="table-container">
 
-            sessionStorage.removeItem("loggedIn");
-            window.location.href = "login.html";
+<table class="table is-fullwidth is-striped is-hoverable is-bordered">
 
-        }
+<thead>
+<tr>
+<th>S.No</th>
+<th>Case Title</th>
+<th>Case No</th>
+<th>Date of Hearing</th>
+<th>Court No</th>
+<th>Remarks</th>
+</tr>
+</thead>
 
-    </script>
+<tbody>
+
+<tr>
+<td>1</td>
+<td>Ishrat Jahan vs S.S.B.H.S</td>
+<td>CS-102/2026</td>
+<td>02 Mar 2026</td>
+<td>12</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>S.S.B.H.S vs Ganga Ram</td>
+<td>CS-118/2026</td>
+<td>17 Mar 2026</td>
+<td>08</td>
+<td>Arguments</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>S.S.B.H.S vs State Authority</td>
+<td>CS-120/2026</td>
+<td>18 Mar 2026</td>
+<td>05</td>
+<td>Reply Filing</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+const toggle=document.getElementById("menuToggle");
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("overlay");
+
+toggle.addEventListener("click",function(){
+sidebar.classList.toggle("active");
+overlay.classList.toggle("active");
+});
+
+overlay.addEventListener("click",function(){
+sidebar.classList.remove("active");
+overlay.classList.remove("active");
+});
+
+function logout(){
+sessionStorage.removeItem("loggedIn");
+window.location.href="login.html";
+}
+
+</script>
 
 </body>
-
 </html>
