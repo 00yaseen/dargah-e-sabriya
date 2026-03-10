@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Court Work Manager</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+
+        .navbar {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header-title {
+            line-height: 1.2;
+        }
+
+        .hero {
+            background: #0f5132;
+            color: white;
+        }
+
+        .table thead {
+            background: #f0f2f5;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #fafafa;
+            border-top: 1px solid #e5e5e5;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar is-white" role="navigation">
+
+        <div class="container">
+
+            <div class="navbar-brand">
+
+                <a class="navbar-item" href="index.html">
+
+                    <img src="delhi-high-court-logo.png" style="max-height:55px;margin-right:12px;">
+
+                    <div class="header-title">
+                        <p class="title is-6 mb-5">Dargah Sabriya</p>
+                        <p class="subtitle is-7 mb-0">Court Work Manager</p>
+                    </div>
+
+                </a>
+
+                <a role="button" class="navbar-burger" data-target="mainNavbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+
+            </div>
+
+
+            <div id="mainNavbar" class="navbar-menu">
+
+                <div class="navbar-end">
+
+                    <a class="navbar-item" href="index.html">Home</a>
+
+                    <a class="navbar-item" href="hc.html">
+                        High Court
+                    </a>
+
+                    <a class="navbar-item" href="phc.html">
+                        Patiala House Court
+                    </a>
+
+                    <a class="navbar-item" href="thc.html">
+                        Tis Hazari Court
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+
+                <h1 class="title has-text-white">
+                    Patiala House Court
+                </h1>
+
+                <p class="subtitle has-text-danger">
+                    Upcoming Hearing List
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TABLE SECTION -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="box">
+
+                <div class="level">
+
+                    <div class="level-left">
+                        <h2 class="title is-5">Case Register</h2>
+                    </div>
+
+                    <div class="level-right">
+                        <span class="tag is-success">Updated</span>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Case Title</th>
+                                <th>Case No</th>
+                                <th>Date of Hearing</th>
+                                <th>Court No</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td>Ishrat Jahan vs S.S.B.H.S</td>
+                                <td>CS-102/2026</td>
+                                <td>02 Mar 2026</td>
+                                <td>12</td>
+                                <td>-</td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>S.S.B.H.S vs Ganga Ram</td>
+                                <td>CS-118/2026</td>
+                                <td>17 Mar 2026</td>
+                                <td>08</td>
+                                <td>Arguments</td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>S.S.B.H.S vs State Authority</td>
+                                <td>CS-120/2026</td>
+                                <td>18 Mar 2026</td>
+                                <td>05</td>
+                                <td>Reply Filing</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="content has-text-centered">
+
+            <p>
+                <strong>Court Work Manager</strong><br>
+                Internal Case Tracking System
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const burgers = document.querySelectorAll('.navbar-burger');
+
+            burgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    const target = el.dataset.target;
+                    const menu = document.getElementById(target);
+
+                    el.classList.toggle('is-active');
+                    menu.classList.toggle('is-active');
+
+                });
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
