@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Court Work Manager</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f6f9;
+            font-family: "Inter", sans-serif;
+        }
+
+        /* TOPBAR */
+
+        .topbar {
+            background: #1f2a44;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .topbar strong {
+            color: white;
+        }
+
+        .menu-toggle {
+            font-size: 26px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #1f2a44;
+            color: white;
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        /* MENU */
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #2f3e67;
+        }
+
+        .sidebar a.active {
+            background: #c9a227;
+            color: black;
+        }
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: #1f2a44;
+            color: white;
+            border-radius: 8px;
+        }
+
+        /* CARDS */
+
+        .dashboard-card {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* STATS */
+
+        .stat {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1f2a44;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* MOBILE OVERLAY */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 900;
+            display: none;
+        }
+
+        /* MOBILE */
+
+        @media screen and (max-width:768px) {
+
+            .sidebar {
+                left: -260px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <i class='bx bx-menu menu-toggle' id="menuToggle"></i>
+
+        <strong>Court Work Manager</strong>
+
+    </div>
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="logo">
+
+            <img src="delhi-high-court-logo.png">
+
+            <div>
+                <strong class="has-text-white">Dargah Sabriya</strong><br>
+                <small>Court Work Manager</small>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <a href="home.html" class="active">
+            <i class='bx bx-home'></i> Dashboard
+        </a>
+
+        <a href="hc.html">
+            <i class='bx bx-buildings'></i> High Court
+        </a>
+
+        <a href="phc.html">
+            <i class='bx bx-landmark'></i> Patiala House Court
+        </a>
+
+        <a href="thc.html">
+            <i class='bx bx-briefcase'></i> Tis Hazari Court
+        </a>
+
+        <a href="file-management.html">
+            <i class='bx bx-folder'></i> File Management
+        </a>
+
+        <a onclick="logout()"><i class='bx bx-log-out'></i>Logout</a>
+
+    </div>
+
+    <!-- OVERLAY -->
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <div class="columns is-multiline">
+
+            <div class="column is-3">
+                <div class="box dashboard-card has-text-centered">
+                    <span class="icon is-large has-text-info">
+                        <i class='bx bx-briefcase bx-md'></i>
+                    </span>
+                    <p class="section-title">Total Cases</p>
+                    <p class="stat">~33</p>
+                </div>
+            </div>
+
+            <div class="column is-3">
+                <div class="box dashboard-card has-text-centered">
+                    <span class="icon is-large has-text-warning">
+                        <i class='bx bx-time-five bx-md'></i>
+                    </span>
+                    <p class="section-title">Pending Cases</p>
+                    <p class="stat">33</p>
+                </div>
+            </div>
+
+            <div class="column is-3">
+                <div class="box dashboard-card has-text-centered">
+                    <span class="icon is-large has-text-success">
+                        <i class='bx bx-check-circle bx-md'></i>
+                    </span>
+                    <p class="section-title">Won Cases</p>
+                    <p class="stat">~0</p>
+                </div>
+            </div>
+
+            <div class="column is-3">
+                <div class="box dashboard-card has-text-centered">
+                    <span class="icon is-large has-text-link">
+                        <i class='bx bx-folder bx-md'></i>
+                    </span>
+                    <p class="section-title">Documents Stored</p>
+                    <p class="stat">500</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- TODAY HEARINGS -->
+
+        <section class="section pt-4 pl-2 pr-2">
+
+            <div class="box dashboard-card">
+
+                <div class="level box" style="background: #1f2a44;">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <p class="has-text-weight-bold has-text-white">
+                                This Month (March)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+
+                            <span class="tag has-background-warning">
+                                Upcoming Case List
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table is-fullwidth is-striped is-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>Case Title</th>
+                            <th>Date</th>
+                            <th>Court</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>S.S.B.H.S vs GANGA RAM, MASHKOORA, SALEEM</td>
+                            <td>17.03.2026</td>
+                            <td>Tis Hazari Court</td>
+                            <td>Argument on 7/11 and order on 7/11</td>
+                        </tr>
+
+                        <tr>
+                            <td>S.S.B.H.S vs HAFIZUDDIN</td>
+                            <td>18.03.2026</td>
+                            <td>Patiala House Court</td>
+                            <td>There is no Power to hear the matter.</td>
+                        </tr>
+
+                        <tr>
+                            <td>S.S.B.H.S vs NAVED KHAN</td>
+                            <td>19.03.2026</td>
+                            <td>Tis Hazari Court</td>
+                            <td>on order .. at 2:00 PM</td>
+                        </tr>
+
+                        <tr>
+                            <td>S.S.B.H.S vs MEENA SHARMA</td>
+                            <td>24.03.2026</td>
+                            <td>Tis Hazari Court</td>
+                            <td>One more last oppurtunity for clarification.</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        const toggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+
+        toggle.addEventListener("click", function () {
+
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
+
+        });
+
+        overlay.addEventListener("click", function () {
+
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+
+        });
+
+        function logout() {
+
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
