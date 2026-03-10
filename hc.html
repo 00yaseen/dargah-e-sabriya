@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Court Work Manager</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar is-white has-shadow" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand">
+
+            <a class="navbar-item" href="index.html">
+
+                <img src="delhi-high-court-logo.png" alt="Delhi High Court Logo"
+                    style="max-height:55px; margin-right:10px;">
+
+                <div>
+                    <p class="title is-6 mb-5">Dargah Sabriya</p>
+                    <p class="subtitle is-7">Court Work Manager</p>
+                </div>
+
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="mainNavbar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+
+        </div>
+
+
+        <div id="mainNavbar" class="navbar-menu">
+
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+
+                <a class="navbar-item" href="hc.html">
+                    High Court
+                </a>
+
+                <a class="navbar-item" href="phc.html">
+                    Patiala House Court
+                </a>
+
+                <a class="navbar-item" href="thc.html">
+                    Tis Hazari
+                </a>
+
+                <a class="navbar-item" href="file-management.html">
+                    File Management
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+
+            <h1 class="title has-text-centered">High Court Case Tracker</h1>
+
+            <div class="columns is-centered">
+
+                <div class="column is-8">
+
+                    <div class="table-container">
+
+                        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+
+                            <thead>
+                                <tr>
+                                    <th>S.NO</th>
+                                    <th>Title</th>
+                                    <th>D.O.H</th>
+                                    <th>Remarks (if any)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ishrat Jahan vs S.S.B.H.S</td>
+                                    <td>02.03.2026</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        burgers.forEach(el => {
+            el.addEventListener('click', () => {
+
+                const target = el.dataset.target;
+                const menu = document.getElementById(target);
+
+                el.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+
+            });
+        });
+
+    });
+
+</script>
