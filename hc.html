@@ -3,31 +3,170 @@
 
 <head>
 
+    <script>
+
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Court Work Manager</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
     <style>
         body {
-            background: #f5f7fa;
+            background: #f4f6f9;
+            font-family: "Inter", sans-serif;
         }
+
+        /* TOPBAR */
+
+        .topbar {
+            background: #1f2a44;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .menu-toggle {
+            font-size: 26px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #1f2a44;
+            color: white;
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        /* MENU */
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #2f3e67;
+        }
+
+        .sidebar a.active {
+            background: #c9a227;
+            color: black;
+        }
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        /* HERO */
 
         .hero {
-            background: #0f5132;
+            background: #1f2a44;
             color: white;
+            border-radius: 8px;
         }
 
-        .table thead {
-            background: #f0f2f5;
+        /* CARDS */
+
+        .dashboard-card {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .footer {
-            margin-top: 40px;
-            padding: 20px;
-            background: #fafafa;
-            border-top: 1px solid #e5e5e5;
+        /* STATS */
+
+        .stat {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1f2a44;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* OVERLAY */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 900;
+        }
+
+        /* MOBILE */
+
+        @media screen and (max-width:768px) {
+
+            .sidebar {
+                left: -260px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
         }
     </style>
 
@@ -35,231 +174,195 @@
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- TOPBAR -->
 
-    <nav class="navbar is-white has-shadow">
+    <div class="topbar">
+        <i class='bx bx-menu menu-toggle' id="menuToggle"></i>
+        <strong>Court Work Manager</strong>
+    </div>
 
-        <div class="container">
+    <!-- SIDEBAR -->
 
-            <div class="navbar-brand">
+    <div class="sidebar" id="sidebar">
 
-                <a class="navbar-item" href="index.html">
-
-                    <img src="delhi-high-court-logo.png" alt="Delhi High Court Logo"
-                        style="max-height:55px;margin-right:10px;">
-
-                    <div>
-                        <p class="title is-6 mb-5">Dargah Sabriya</p>
-                        <p class="subtitle is-7 mb-0">Court Work Manager</p>
-                    </div>
-
-                </a>
-
-                <a role="button" class="navbar-burger" data-target="mainNavbar">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-
+        <div class="logo">
+            <img src="delhi-high-court-logo.png">
+            <div>
+                <strong class="has-text-white">Dargah Sabriya</strong><br>
+                <small>Court Work Manager</small>
             </div>
-
-
-            <div id="mainNavbar" class="navbar-menu">
-
-                <div class="navbar-end">
-
-                    <a class="navbar-item" href="index.html">Home</a>
-
-                    <a class="navbar-item is-active" href="hc.html">High Court</a>
-
-                    <a class="navbar-item" href="phc.html">Patiala House Court</a>
-
-                    <a class="navbar-item" href="thc.html">Tis Hazari Court</a>
-                </div>
-
-            </div>
-
         </div>
 
-    </nav>
+        <hr>
 
+        <a href="dashboard.html">
+            <i class='bx bx-home'></i> Dashboard
+        </a>
 
-    <!-- HERO HEADER -->
+        <a href="hc.html" class="active">
+            <i class='bx bx-buildings'></i> High Court
+        </a>
 
-    <section class="hero is-small">
+        <a href="phc.html">
+            <i class='bx bx-landmark'></i> Patiala House Court
+        </a>
 
-        <div class="hero-body">
+        <a href="thc.html">
+            <i class='bx bx-briefcase'></i> Tis Hazari Court
+        </a>
 
-            <div class="container has-text-centered">
+        <a href="file-management.html">
+            <i class='bx bx-folder'></i> File Management
+        </a>
 
-                <h1 class="title has-text-white">High Court</h1>
-                <p class="subtitle has-text-danger">Upcoming Case List</p>
+        <a onclick="logout()"><i class='bx bx-log-out'></i>Logout</a>
+    </div>
 
-            </div>
+    <!-- OVERLAY -->
 
-        </div>
+    <div class="overlay" id="overlay"></div>
 
-    </section>
+    <!-- MAIN CONTENT -->
 
+    <div class="main-content">
 
-    <!-- CASE TABLE -->
+        <!-- CASE TABLE -->
 
-    <section class="section">
+        <section class="section pt-1">
 
-        <div class="container">
+            <div class="container">
 
-            <div class="box">
+                <div class="box">
 
-                <div class="level">
+                    <div class="level p-4 box" style="background: #1f2a44;">
 
-                    <div class="level-left">
-                        <h2 class="title is-5">Case Register</h2>
+                        <div class="level-left">
+                            <p class="has-text-weight-bold has-text-white">
+                                High Court
+                            </p>
+                        </div>
+
+                        <div class="level-right">
+                            <span class="tag has-background-warning">Upcoming Case List</span>
+                        </div>
+
                     </div>
 
-                    <div class="level-right">
-                        <span class="tag is-success">Updated</span>
+                    <div class="table-container">
+
+                        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Case Title</th>
+                                    <th>Case No.</th>
+                                    <th>Date of Hearing</th>
+                                    <th>Court No.</th>
+                                    <th>Status</th>
+                                    <th>Documents</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>S.S.B.H.S vs Union Of India</td>
+                                    <td>W.P.(C) 5167/2024</td>
+                                    <td>04.05.2026</td>
+                                    <td>10</td>
+                                    <td>Rejoinder filing</td>
+                                    <td>
+                                        <a class="button is-small is-link"
+                                            href="https://drive.google.com/drive/folders/1ExPr_TQ8rytftEi5ix-BA80KdA6Y79o5?usp=drive_link"
+                                            target="_blank">
+                                            View File
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>S.S.B.H.S vs Govt. of NCT</td>
+                                    <td>W.P.(C) 2113/2024</td>
+                                    <td>-</td>
+                                    <td>10</td>
+                                    <td>Disposed.. for now</td>
+                                    <td>
+                                        <a class="button is-small is-link"
+                                            href="https://drive.google.com/drive/folders/1A6zKlPQbtMU1kA5bdiTJsemRTX8pVKXv?usp=drive_link">
+                                            View File
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>ISHRAT KHAN vs S.S.B.H.S</td>
+                                    <td>C.R.P 110/2025</td>
+                                    <td>16.07.2026</td>
+                                    <td>10</td>
+                                    <td>Short Synopsis on 15.04.2025</td>
+                                    <td>
+                                        <a class="button is-small is-link"
+                                            href="https://drive.google.com/drive/folders/12SufZDYDef3-UYo5xOmqJsfTIMprBXqL?usp=drive_link">
+                                            View File
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>KHAWAJA HASEEB vs LT GOVERNOR</td>
+                                    <td>W.P.(C) 15947/2025</td>
+                                    <td>24.08.2026</td>
+                                    <td>12</td>
+                                    <td>Fresh Case</td>
+                                    <td>
+                                        <a class="button is-small is-link"
+                                            href="https://drive.google.com/drive/folders/1pPgD-dZMZByrCIihWQ0H2KzW4tpeo7lY?usp=drive_link">
+                                            View File
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
                     </div>
-
-                </div>
-
-
-                <div class="table-container">
-
-                    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Case Title</th>
-                                <th>Case No.</th>
-                                <th>Date of Hearing</th>
-                                <th>Court No.</th>
-                                <th>Status</th>
-                                <th>Documents</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            <tr>
-                                <td>1</td>
-                                <td>S.S.B.H.S vs Ganga Ram</td>
-                                <td>CWP-1234/2026</td>
-                                <td>17 Mar 2026</td>
-                                <td>15</td>
-                                <td>Pending</td>
-                                <td>
-                                    <a class="button is-small is-link" href="GOOGLE_DRIVE_LINK" target="_blank">
-                                        View File
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>S.S.B.H.S vs State Authority</td>
-                                <td>CWP-1235/2026</td>
-                                <td>18 Mar 2026</td>
-                                <td>10</td>
-                                <td>Arguments</td>
-                                <td>
-                                    <a class="button is-small is-link" href="GOOGLE_DRIVE_LINK" target="_blank">
-                                        View File
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>Property Dispute – Mandi</td>
-                                <td>CWP-1240/2026</td>
-                                <td>20 Mar 2026</td>
-                                <td>07</td>
-                                <td>Reply Filing</td>
-                                <td>
-                                    <a class="button is-small is-link" href="GOOGLE_DRIVE_LINK" target="_blank">
-                                        View File
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>4</td>
-                                <td>S.S.B.H.S vs Municipal Authority</td>
-                                <td>CWP-1245/2026</td>
-                                <td>22 Mar 2026</td>
-                                <td>12</td>
-                                <td>Hearing</td>
-                                <td>
-                                    <a class="button is-small is-link" href="GOOGLE_DRIVE_LINK" target="_blank">
-                                        View File
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>5</td>
-                                <td>S.S.B.H.S vs Land Department</td>
-                                <td>CWP-1250/2026</td>
-                                <td>25 Mar 2026</td>
-                                <td>09</td>
-                                <td>Arguments</td>
-                                <td>
-                                    <a class="button is-small is-link" href="GOOGLE_DRIVE_LINK" target="_blank">
-                                        View File
-                                    </a>
-                                </td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-
-        <div class="content has-text-centered">
-
-            <p>
-                <strong>Court Work Manager</strong><br>
-                Internal Case Tracking System
-            </p>
-
-        </div>
-
-    </footer>
-
-
+    </div>
 
     <script>
 
-        document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
 
-            const burgers = document.querySelectorAll('.navbar-burger');
-
-            burgers.forEach(el => {
-                el.addEventListener('click', () => {
-
-                    const target = el.dataset.target;
-                    const menu = document.getElementById(target);
-
-                    el.classList.toggle('is-active');
-                    menu.classList.toggle('is-active');
-
-                });
-            });
-
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
         });
+
+        overlay.addEventListener("click", function () {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        function logout() {
+
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+
+        }
 
     </script>
 
